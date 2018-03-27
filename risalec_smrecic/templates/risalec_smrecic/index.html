@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-1.10.1.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <h1 align="center">Risar smrečic</h1>
+
+    <div>
+	    <div style="margin: 0 auto;float: none;width:50%;margin-top: 2%;" id="inputHolder" class="input-group" >
+		  		<div class="input-group-prepend">
+		    		<span class="input-group-text">Višina smrečice:</span>
+		 		</div>
+		 		<input type="text" id="visina" class="form-control" placeholder="Vnesite željeno višino smrečice" aria-label="Višina smrečice" aria-describedby="basic-addon1">
+		</div>
+	</div>
+
+	<div style="margin: 0 auto;float: none;width:50%;margin-top: 1%;text-align: center;" id="errorLog"></div>
+
+	<div style="margin-top: 3%;" id="smrecicaHolder"></div>
+
+    <!-- Optional JavaScript -->
+    <script type="text/javascript">
+    	$('#visina').keyup(function(event){
+    		var data = $('#visina').val();
+			visina = parseInt(data);
+
+			try {
+				// $('#intError').remove();
+				$('#errorLog').empty();
+			}
+			catch (err) {
+			}
+
+
+			if (isNaN(visina) || data.length > visina.toString().length){
+				$('#smrecicaHolder').empty();
+				$('#errorLog').append("<p style='font-style:italic;' id='intError'>Prosim, vnesite celoštevilčno vrednost.</p>");
+			}
+			else if (visina > 100) {
+				$('#errorLog').append("<p style='font-style:italic;' id='intError'>Prosim, vnesite manjšo vrednost. Največja dovoljena višina je 100.</p>");
+				return;
+			}
+			else {
+				$('#smrecicaHolder').empty();
+
+				for (var i = 0; i < visina; i++) {
+					var line = "";
+					for (var j = 0; j < 2*visina - 1; j++) {
+						if (j < i) {
+							line += "&nbsp;";
+						}
+						else if (j > 2*visina - 2 - i) {
+							line += "&nbsp;";
+						}
+						else {
+							line += "*";
+						}
+					}
+					line += "<br>";
+					$('#smrecicaHolder').append("<p style='display: table;margin:auto' >" + line + "</p>");
+				}
+			}
+
+
+    	})
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+
+</html>
